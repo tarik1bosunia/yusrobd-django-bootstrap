@@ -3,45 +3,70 @@
 
 {% block content %}
 
-<!-- ========================= SECTION MAIN ========================= -->
-<section class="section-intro padding-y-sm">
-<div class="container">
+    <!-- ========================= SECTION MAIN ========================= -->
+    <section class="section-intro padding-y-sm">
+        <div class="container">
+            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item intro-banner-wrap active" data-bs-interval="1000">
+                        <img src="{% static 'images/banners/2.PNG' %}" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item intro-banner-wrap" data-bs-interval="1000">
+                        <img src="{% static 'images/banners/1.jpg' %}" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item intro-banner-wrap">
+                        <img src="{% static 'images/banners/1.jpg' %}" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
 
-<div class="intro-banner-wrap">
-	<img src="{% static 'images/banners/1.jpg' %}" class="img-fluid rounded">
-</div>
+            <div class="intro-banner-wrap">
+                <img src="{% static 'images/banners/2.PNG' %}" class="img-fluid rounded">
+            </div>
 
-</div> <!-- container //  -->
-</section>
-<!-- ========================= SECTION MAIN END// ========================= -->
+        </div> <!-- container //  -->
+    </section>
+    <!-- ========================= SECTION MAIN END// ========================= -->
 
-<!-- ========================= SECTION  ========================= -->
-<section class="section-name padding-y-sm">
-<div class="container">
+    <!-- ========================= SECTION  ========================= -->
+    <section class="section-name padding-y-sm">
+        <div class="container">
 
-<header class="section-heading">
-	<a href="{% url 'store' %}" class="btn btn-outline-primary float-right">See all</a>
-	<h3 class="section-title">Popular products</h3>
-</header><!-- sect-heading -->
+            <header class="section-heading">
+                <a href="{% url 'store' %}" class="btn btn-outline-primary float-right">See all</a>
+                <h3 class="section-title">Popular products</h3>
+            </header><!-- sect-heading -->
 
 
-<div class="row">
-    {% for product in products %}
-	    <div class="col-md-3">
-		<div class="card card-product-grid">
-			<a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}" alt="{{ product.product_name }}"> </a>
-			<figcaption class="info-wrap">
-				<a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
-				<div class="price mt-1">${{ product.price }}</div> <!-- price-wrap.// -->
-			</figcaption>
-		</div>
-	</div> <!-- col.// -->
-    {% endfor %}
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-md-3">
+                        <div class="card card-product-grid">
+                            <a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}"
+                                                                                   alt="{{ product.product_name }}">
+                            </a>
+                            <figcaption class="info-wrap">
+                                <a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+                                <div class="price mt-1">${{ product.price }}</div> <!-- price-wrap.// -->
+                            </figcaption>
+                        </div>
+                    </div> <!-- col.// -->
+                {% endfor %}
 
-</div> <!-- row.// -->
+            </div> <!-- row.// -->
 
-</div><!-- container // -->
-</section>
-<!-- ========================= SECTION  END// ========================= -->
+        </div><!-- container // -->
+    </section>
+    <!-- ========================= SECTION  END// ========================= -->
 
 {% endblock content %}
