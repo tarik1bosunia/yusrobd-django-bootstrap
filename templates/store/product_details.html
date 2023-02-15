@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
 {% block content %}
+    <link rel="stylesheet" href="{% static 'css/product_details.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <script src="{% static 'js/product_details.js' %}" defer></script>
+
     <section class="section-content padding-y bg">
         <div class="container">
 
@@ -9,14 +14,31 @@
             <div class="card">
                 <div class="row no-gutters">
                     <aside class="col-md-6">
+
                         <article class="gallery-wrap">
-                            <div class="img-big-wrap">
-                                <a href="#"><img src="{{ product.images.url }}"></a>
+                            <div id="zoom" class="img-big-wrap product-img">
+                                <img src="{{ product.images.url }}">
                             </div> <!-- img-big-wrap.// -->
 
                         </article> <!-- gallery-wrap .end// -->
+                        <ul class="thumb">
+                            {% for image in product_gallery %}
+                                <li>
+                                    <button id="primgbtn{{ image.product_id }}{{ image.id }}"
+                                     onclick=" setImage('primgbtn{{ image.product_id }}{{ image.id }}') ">
+
+                                        <img  src="{{ image.image.url }}" alt="Product Image">
+                                    </button>
+
+
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <div class="magnifier-lens"></div>
+
                     </aside>
-                    <main class="col-md-6 border-left">
+                    <main class="col-md-6 border-left relative">
+                        <div class="magnified-img"></div>
                         <article class="content-body">
 
                             <h2 class="title">{{ product.product_name }}</h2>
@@ -29,46 +51,46 @@
                                 {{ product.description }}
                             </p>
 
-
-                            <hr>
-                            <div class="row">
-                                <div class="item-option-select">
-                                    <h6>Choose Color</h6>
-                                    <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                                        <label class="btn btn-light">
-                                            <input type="radio" name="radio_color"> Silver
-                                        </label>
-                                        <label class="btn btn-light">
-                                            <input type="radio" name="radio_color"> Gray
-                                        </label>
-                                        <label class="btn btn-light active">
-                                            <input type="radio" name="radio_color checked"> Gold
-                                        </label>
-                                        <label class="btn btn-light">
-                                            <input type="radio" name="radio_color"> Black
-                                        </label>
-                                    </div>
-                                </div>
-                            </div> <!-- row.// -->
-                            <div class="row">
-                                <div class="item-option-select">
-                                    <h6>Select Size</h6>
-                                    <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                                        <label class="btn btn-light">
-                                            <input type="radio" name="radio_color"> S
-                                        </label>
-                                        <label class="btn btn-light active">
-                                            <input type="radio" name="radio_color" checked> M
-                                        </label>
-                                        <label class="btn btn-light">
-                                            <input type="radio" name="radio_color"> L
-                                        </label>
-                                        <label class="btn btn-light">
-                                            <input type="radio" name="radio_color"> XL
-                                        </label>
-                                    </div>
-                                </div>
-                            </div> <!-- row.// -->
+{##}
+{#                            <hr>#}
+{#                            <div class="row">#}
+{#                                <div class="item-option-select">#}
+{#                                    <h6>Choose Color</h6>#}
+{#                                    <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">#}
+{#                                        <label class="btn btn-light">#}
+{#                                            <input type="radio" name="radio_color"> Silver#}
+{#                                        </label>#}
+{#                                        <label class="btn btn-light">#}
+{#                                            <input type="radio" name="radio_color"> Gray#}
+{#                                        </label>#}
+{#                                        <label class="btn btn-light active">#}
+{#                                            <input type="radio" name="radio_color checked"> Gold#}
+{#                                        </label>#}
+{#                                        <label class="btn btn-light">#}
+{#                                            <input type="radio" name="radio_color"> Black#}
+{#                                        </label>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div> <!-- row.// -->#}
+{#                            <div class="row">#}
+{#                                <div class="item-option-select">#}
+{#                                    <h6>Select Size</h6>#}
+{#                                    <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">#}
+{#                                        <label class="btn btn-light">#}
+{#                                            <input type="radio" name="radio_color"> S#}
+{#                                        </label>#}
+{#                                        <label class="btn btn-light active">#}
+{#                                            <input type="radio" name="radio_color" checked> M#}
+{#                                        </label>#}
+{#                                        <label class="btn btn-light">#}
+{#                                            <input type="radio" name="radio_color"> L#}
+{#                                        </label>#}
+{#                                        <label class="btn btn-light">#}
+{#                                            <input type="radio" name="radio_color"> XL#}
+{#                                        </label>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div> <!-- row.// -->#}
                             <hr>
                                     {% if product.stock > 0 %}
                                         {% if isProductInCart %}
@@ -99,6 +121,7 @@
                                      {% endif %}
 
                         </article> <!-- product-info-aside .// -->
+
                     </main> <!-- col.// -->
                 </div> <!-- row.// -->
             </div> <!-- card.// -->
@@ -140,5 +163,7 @@
         </div> <!-- container .//  -->
     </section>
     <!-- ========================= SECTION CONTENT END// ========================= -->
+
+
 
 {% endblock content %}
